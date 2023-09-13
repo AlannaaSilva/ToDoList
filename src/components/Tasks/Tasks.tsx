@@ -6,7 +6,7 @@ import styles from "./Tasks.module.css";
 
 export function Tasks() {
 
-  const [taskList, setTasklist] = useState(["Estudar"])
+  const [taskList, setTasklist] = useState(['estudar'])
   const [completedTask, setCompletedTask] = useState(0)
 
   function deleteMyTask(titulo:string){
