@@ -1,43 +1,46 @@
-import { useState } from 'react';
+import { useState } from "react";
 import styles from "../Task/Task.module.css";
 
-import { Trash, Circle, CheckCircle} from "@phosphor-icons/react"
+import { Trash, Circle, CheckCircle } from "@phosphor-icons/react";
 
+// Interface que define as propriedades esperadas pelo componente Task
 interface TaskProps {
-  titulo: string
-  onDelete: (titulo:string) => void;
-  onCheck: (numero:number)=> void;
+  titulo: string;
+  onDelete: (titulo: string) => void;
+  onCheck: (numero: number) => void;
 }
 
-
 export function Task({ titulo, onDelete, onCheck }: TaskProps) {
-  const [checkmark, setCheckmark] = useState(false)
+  // Estado que controla se a tarefa está marcada como concluída
+  const [checkmark, setCheckmark] = useState(false);
 
-  function handleOnClick(){
-    setCheckmark(!checkmark)
+  // Função chamada ao clicar no botão de marcar/desmarcar tarefa
+  function handleOnClick() {
+    // Alterna o estado de "checkmark" entre verdadeiro e falso
+    setCheckmark(!checkmark);
 
-    if(checkmark === false){
-      onCheck(1)
-    }else{
-      onCheck(-1)
+    // Atualiza o número de tarefas concluídas com base no estado atual
+    if (checkmark === false) {
+      onCheck(1); // Incrementa o contador de tarefas concluídas
+    } else {
+      onCheck(-1); // Decrementa o contador de tarefas concluídas
     }
-
   }
 
-  function handleOnDelete(){
-    onDelete(titulo);
+  // Função chamada ao clicar no botão de deletar tarefa
+  function handleOnDelete() {
+    onDelete(titulo); // Chama a função de deletar passando o título da tarefa
   }
-  
 
-  return(
+  return (
     <div className={styles.list}>
-      <button onClick={handleOnClick} className={styles.check} >
-      {checkmark ? <CheckCircle size={20}/> : <Circle size={20}/> }
+      <button onClick={handleOnClick} className={styles.check}>
+        {checkmark ? <CheckCircle size={20} /> : <Circle size={20} />}
       </button>
       <p>{titulo}</p>
       <button className={styles.DeleteButton} onClick={handleOnDelete}>
-       <Trash size={20}/>
+        <Trash size={20} />
       </button>
     </div>
-  )
+  );
 }
